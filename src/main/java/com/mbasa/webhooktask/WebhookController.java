@@ -12,7 +12,7 @@ import java.util.Map;
 public class WebhookController {
 
     @PostMapping("/webhook")
-    public ResponseEntity<Map<String, char[]>> processData(@RequestBody DataRequest request) {
+    public ResponseEntity<Map<String, String[]>> processData(@RequestBody DataRequest request) {
 
         String input = request.getData();
 
@@ -20,10 +20,10 @@ public class WebhookController {
             return ResponseEntity.badRequest().build();
         }
 
-        char[] chars = input.toCharArray();
+        String[] chars = input.split("");
         Arrays.sort(chars);
 
-        Map<String, char[]> response = new HashMap<>();
+        Map<String, String[]> response = new HashMap<>();
         response.put("word", chars);
 
         return ResponseEntity.ok(response);
